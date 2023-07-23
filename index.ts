@@ -1,4 +1,4 @@
-import { Telegraf, Markup } from "telegraf";
+import { Telegraf, Markup, session } from "telegraf";
 import { BOT_TOKEN } from "./src/credentials";
 
 const bot = new Telegraf(BOT_TOKEN);
@@ -17,6 +17,8 @@ const menuButtons = Markup.inlineKeyboard([
 const backButton = Markup.inlineKeyboard([
   Markup.button.callback("Назад к меню", "back"),
 ]);
+
+bot.use(session());
 
 bot.start((ctx) => {
   const name = ctx.from?.first_name;

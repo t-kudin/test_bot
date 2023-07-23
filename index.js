@@ -1,9 +1,9 @@
 "use strict";
-exports.__esModule = true;
-var telegraf_1 = require("telegraf");
-var credentials_1 = require("./src/credentials");
-var bot = new telegraf_1.Telegraf(credentials_1.BOT_TOKEN);
-var menuButtons = telegraf_1.Markup.inlineKeyboard([
+Object.defineProperty(exports, "__esModule", { value: true });
+const telegraf_1 = require("telegraf");
+const credentials_1 = require("./src/credentials");
+const bot = new telegraf_1.Telegraf(credentials_1.BOT_TOKEN);
+const menuButtons = telegraf_1.Markup.inlineKeyboard([
     [
         telegraf_1.Markup.button.callback("Каталог", "catalog"),
         telegraf_1.Markup.button.callback("Обменки", "exchange"),
@@ -13,34 +13,255 @@ var menuButtons = telegraf_1.Markup.inlineKeyboard([
         telegraf_1.Markup.button.callback("Б/У", "used"),
     ],
 ]);
-var backButton = telegraf_1.Markup.inlineKeyboard([
+const backButton = telegraf_1.Markup.inlineKeyboard([
     telegraf_1.Markup.button.callback("Назад к меню", "back"),
 ]);
-bot.start(function (ctx) {
+bot.use((0, telegraf_1.session)());
+bot.start((ctx) => {
     var _a;
-    var name = (_a = ctx.from) === null || _a === void 0 ? void 0 : _a.first_name;
-    ctx.reply("\u0417\u0434\u0440\u0430\u0432\u0441\u0442\u0432\u0443\u0439\u0442\u0435, ".concat(name, ". \u0414\u043E\u0431\u0440\u043E \u043F\u043E\u0436\u0430\u043B\u043E\u0432\u0430\u0442\u044C \u0432 Apple Park!"), menuButtons);
+    const name = (_a = ctx.from) === null || _a === void 0 ? void 0 : _a.first_name;
+    ctx.reply(`Здравствуйте, ${name}. Добро пожаловать в Apple Park!`, menuButtons);
 });
-bot.action("catalog", function (ctx) {
-    ctx.reply("\u041E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u043D\u044B\u0439 \u043F\u0440\u0430\u0439\u0441 \n  \u043D\u0430 11.07.2023\n  \n  \uD83D\uDD0C\u0410\u043A\u0441\u0435\u0441\u0441\u0443\u0430\u0440\u044B \uD83D\uDD0C\n  \n  \u270F\uFE0F Pencil 1gen - 130$\n  \u270F\uFE0F Pencil 2gen - 140$\n  \uD83D\uDDB2 Homepod Mini Black/white - 135 $ \uD83D\uDD25\n  \u26AA\uFE0F AirTag (1 pack) - 50$\n  \u26AA\uFE0F AirTag (4 pack) - 155$\n  \uD83D\uDD0B MagSafe Battery Charger - 150$\n  \u26AA\uFE0F MagSafe - 65$ \n  \uD83D\uDDB1\uFE0F Magic Mouse 3 white - 125$\n  \uD83E\uDEA7 Magic Trackpad - 205$\n  \uD83D\uDCFA  Apple TV HD 2021 32 MHY93  - 175$  \n  \n  \u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\n  \u041A\u0443\u0431\u0438\u043A 1\u0410 \u041E\u0440\u0438\u0433 -17$\n  \u041A\u0443\u0431\u0438\u043A Baseus 20W Type-C - 17$\n  \u041A\u0443\u0431\u0438\u043A 20w USB-C (\u043E\u0440\u0438\u0433) - 33$\n  \u041A\u0430\u0431\u0435\u043B\u044C Type-C Baseus - 14$\n  \u041A\u0430\u0431\u0435\u043B\u044C Type-C (\u043E\u0440\u0438\u0433) \n  \u0431/\u0443 9/10- 18$\n  \u041A\u0430\u0431\u0435\u043B\u044C Type-C (\u043E\u0440\u0438\u0433) - 30$\n  \u041F\u0435\u0440\u0435\u0445\u043E\u0434\u043D\u0438\u043A lightning 3.5 -20$\n  \n  \u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\n  \uD83C\uDFA7AirPods\uD83C\uDFA7\n  \n  AirPods 2 - 145$\n  Airpods 3 - 210$\n  AirPods Pro MagSafe - 235$\n  AirPods Pro 2022 - 260$ \n  AirPods Max \uD83C\uDFA7 - \u043E\u0442 620$\n  \u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\n  SE 2022 64   - \u043E\u0442 430$\n  SE 2022 128 - \u043E\u0442 540$\n  11 64 - \u043E\u0442 515$\n  11 128  - \u043E\u0442 580$ \n  12 mini 64 - \u043E\u0442 550$\n  12 mini 128 - \u043E\u0442 595$\n  12 mini 256 - \u043E\u0442 630$\n  \n  \u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\n  12 64 - \u043E\u0442 670$\n  12 64 White \u0410\u043A\u0442\u0438\u0432 - 605$\n  12 128 - \u043E\u0442 730$\n  12 256 - \u043E\u0442 735$\n  \u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\n  12 Pro 128 - \u043E\u0442 830$\n  12 Pro 256 - \u043E\u0442 880$\n  \n  12 Pro Max 128 - \u043E\u0442 890$\n  \u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\n  13 Mini 128 - 765$\n  13 Mini 256 - \u043E\u0442 865$\n  \n  13 128 - \u043E\u0442 760$\n  13 256 - \u043E\u0442 900$\n  13 512 - \u043E\u0442 1010$\n  \n  13 Pro Max 128 - \u043E\u0442 1170$\n  \u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\n  \n  14 128 - \u043E\u0442 840$ \uD83D\uDD25\n  14 256 - \u043E\u0442 960$ \n  \n  14 Plus 128 - \u043E\u0442 930$ \n  14 Plus 256 - \u043E\u0442 1080$ \n  \n  14 Pro 128 - \u043E\u0442 1100$\uD83D\uDD25\n  14 Pro 256 - \u043E\u0442 1205$\n  \n  14 Pro 512 - \u043E\u0442 1460$\n  \n  14 Pro Max 128 - \u043E\u0442 1200$\n  14 Pro Max 256 - \u043E\u0442 1300$\n  14 Pro Max 512 - \u043E\u0442 1585$\n  14 Pro Max 1tb - \u043E\u0442 1710$\n  \n  \n  \n  \uD83D\uDCBBMacBook\uD83D\uDCBB\n  ------------------\n  \n  MacBook Air 13\u201D M1/8/256Gb - \u043E\u0442 975$\n  \n  MacBook Air 13\u201D M1/8/512Gb - 1380$\n  \n  MacBook Pro 13\u201DM1/8/512Gb - \u043E\u0442 1440$\n  \n  \n  MacBook Air 13\u201D MLXW3\n  M2/8/256Gb \u26AB\uFE0F\u26AA\uFE0F - \u043E\u0442 1255$\n  \n  MacBook Pro 14\u201DM1/16/512Gb (MKGP3)-1935$\n  \n  MacBook Air 13\u201D MLXX3 M2/8/512Gb  - 1630$\n  \n  MacBook Pro 13\u201D MNEP3 M2/8/256Gb  - 1400$\n  \n  MacBook Pro 13\u201D MNEQ3 M2/8/512Gb  - 1675$\n  \n  MacBook Pro 13\u201D MNEJ3 M2/8/512Gb  - 1675$ \n  \n  \n  MacBook Pro 14\" M2 Pro 2023\u00A0 512Gb Silver (MPHH3) - 2210$\n  \n  MacBook Pro 16\" M2 Pro 2023\u00A0 1024Gb Gray\u00A0(MNW93) - 2910\n  \n  \n  MacBook Pro 16\u201D M1 Max/32/1TB 2021  MK1A3 - 3390$\n  \n  \uD83E\uDDF0 Mac Studio (M1 Max/10C/24C/32/512) MJMV3 - 2370$\n      \n  MacBook Pro 16 (M1 Pro/10C/16C/16/1TB) Silver MK1F3 - 2590$ \n  MacBook Pro 14 (M1 Pro/8C/14C/16/512) Space Gray \u0430\u043A\u0442\u0438\u0432. \u0437\u0430\u043F\u0430\u043A MKGP3 - 1850$ \n  MacBook Air 13.6 (M2/8C/10C/8/1TB) Space Gray Z15T0006U - 1750$", backButton);
+bot.action("catalog", (ctx) => {
+    ctx.reply(`Обновленный прайс 
+  на 11.07.2023
+  
+  🔌Аксессуары 🔌
+  
+  ✏️ Pencil 1gen - 130$
+  ✏️ Pencil 2gen - 140$
+  🖲 Homepod Mini Black/white - 135 $ 🔥
+  ⚪️ AirTag (1 pack) - 50$
+  ⚪️ AirTag (4 pack) - 155$
+  🔋 MagSafe Battery Charger - 150$
+  ⚪️ MagSafe - 65$ 
+  🖱️ Magic Mouse 3 white - 125$
+  🪧 Magic Trackpad - 205$
+  📺  Apple TV HD 2021 32 MHY93  - 175$  
+  
+  —————————————————
+  Кубик 1А Ориг -17$
+  Кубик Baseus 20W Type-C - 17$
+  Кубик 20w USB-C (ориг) - 33$
+  Кабель Type-C Baseus - 14$
+  Кабель Type-C (ориг) 
+  б/у 9/10- 18$
+  Кабель Type-C (ориг) - 30$
+  Переходник lightning 3.5 -20$
+  
+  ———————————————
+  🎧AirPods🎧
+  
+  AirPods 2 - 145$
+  Airpods 3 - 210$
+  AirPods Pro MagSafe - 235$
+  AirPods Pro 2022 - 260$ 
+  AirPods Max 🎧 - от 620$
+  ———————————————
+  SE 2022 64   - от 430$
+  SE 2022 128 - от 540$
+  11 64 - от 515$
+  11 128  - от 580$ 
+  12 mini 64 - от 550$
+  12 mini 128 - от 595$
+  12 mini 256 - от 630$
+  
+  ————————————————
+  12 64 - от 670$
+  12 64 White Актив - 605$
+  12 128 - от 730$
+  12 256 - от 735$
+  —————————————————
+  12 Pro 128 - от 830$
+  12 Pro 256 - от 880$
+  
+  12 Pro Max 128 - от 890$
+  —————————————————
+  13 Mini 128 - 765$
+  13 Mini 256 - от 865$
+  
+  13 128 - от 760$
+  13 256 - от 900$
+  13 512 - от 1010$
+  
+  13 Pro Max 128 - от 1170$
+  ————————————————
+  
+  14 128 - от 840$ 🔥
+  14 256 - от 960$ 
+  
+  14 Plus 128 - от 930$ 
+  14 Plus 256 - от 1080$ 
+  
+  14 Pro 128 - от 1100$🔥
+  14 Pro 256 - от 1205$
+  
+  14 Pro 512 - от 1460$
+  
+  14 Pro Max 128 - от 1200$
+  14 Pro Max 256 - от 1300$
+  14 Pro Max 512 - от 1585$
+  14 Pro Max 1tb - от 1710$
+  
+  
+  
+  💻MacBook💻
+  ------------------
+  
+  MacBook Air 13” M1/8/256Gb - от 975$
+  
+  MacBook Air 13” M1/8/512Gb - 1380$
+  
+  MacBook Pro 13”M1/8/512Gb - от 1440$
+  
+  
+  MacBook Air 13” MLXW3
+  M2/8/256Gb ⚫️⚪️ - от 1255$
+  
+  MacBook Pro 14”M1/16/512Gb (MKGP3)-1935$
+  
+  MacBook Air 13” MLXX3 M2/8/512Gb  - 1630$
+  
+  MacBook Pro 13” MNEP3 M2/8/256Gb  - 1400$
+  
+  MacBook Pro 13” MNEQ3 M2/8/512Gb  - 1675$
+  
+  MacBook Pro 13” MNEJ3 M2/8/512Gb  - 1675$ 
+  
+  
+  MacBook Pro 14" M2 Pro 2023  512Gb Silver (MPHH3) - 2210$
+  
+  MacBook Pro 16" M2 Pro 2023  1024Gb Gray (MNW93) - 2910
+  
+  
+  MacBook Pro 16” M1 Max/32/1TB 2021  MK1A3 - 3390$
+  
+  🧰 Mac Studio (M1 Max/10C/24C/32/512) MJMV3 - 2370$
+      
+  MacBook Pro 16 (M1 Pro/10C/16C/16/1TB) Silver MK1F3 - 2590$ 
+  MacBook Pro 14 (M1 Pro/8C/14C/16/512) Space Gray актив. запак MKGP3 - 1850$ 
+  MacBook Air 13.6 (M2/8C/10C/8/1TB) Space Gray Z15T0006U - 1750$`, backButton);
     ctx.answerCbQuery();
 });
-bot.action("exchange", function (ctx) {
-    ctx.reply("\u2618\uFE0F \u041E\u0411\u041C\u0415\u041D\u041A\u0418 11.07.2023\n\n  \u041D\u043E\u0432\u0430\u044F, \u043E\u0440\u0438\u0433\u0438\u043D\u0430\u043B\u044C\u043D\u0430\u044F, \u043D\u0435 \u0432\u043E\u0441\u0441\u0442\u0430\u043D\u043E\u0432\u043B\u0435\u043D\u043D\u0430\u044F \u0442\u0435\u0445\u043D\u0438\u043A\u0430, \u043A\u043E\u0442\u043E\u0440\u0430\u044F \u0431\u044B\u043B\u0430 \u0437\u0430\u043C\u0435\u043D\u0435\u043D\u0430 \u0432 \u0440\u0430\u043C\u043A\u0430\u0445 \u043C\u0438\u0440\u043E\u0432\u043E\u0439 \u0433\u0430\u0440\u0430\u043D\u0442\u0438\u0438 Apple. \n  - \u041F\u043E\u0441\u0442\u0430\u0432\u043B\u044F\u044E\u0442\u0441\u044F \u0431\u0435\u0437 \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0442\u0430 \u0438 \u043A\u043E\u0440\u043E\u0431\u043A\u0438, \u0432 \u0437\u0430\u0432\u043E\u0434\u0441\u043A\u043E\u0439 \u043E\u0440\u0438\u0433\u0438\u043D\u0430\u043B\u044C\u043D\u043E\u0439 \u043F\u043B\u0435\u043D\u043A\u0435, \u043D\u0435 \u0430\u043A\u0442\u0438\u0432\u0438\u0440\u043E\u0432\u0430\u043D\u044B \u270C\uD83C\uDFFB\n  \n  i P h o n e \n  ------------------\n  \n  13 Pro Max 128 Green 03-08-2023  - 1000$\uD83D\uDD25\n  13 Pro 256 Gold, \u043F\u043E\u043B\u043D \u043A-\u0442, 11-11-2023 - 1075$\n  \n  12 mini 128gb \uD83D\uDD35 - 555$\n  12 128 Red - 620$\n  \n  11 128 Black \u0430\u043A\u0442\u0438\u0432  23-01-2024  530$ \n  11 128 White \u0430\u043A\u0442\u0438\u0432  23-01-2024  530$\n  11 128 Purple \u0430\u043A\u0442\u0438\u0432  21-03-2024  530$\n  \n  \u231A\uFE0FA p p l e  W a t c h\n  -----------------------\n  \n  7 45 Blue, \u043F\u043E\u043B\u043D. \u043A-\u0442  10-07-2023 - 375$  \n  7 45 Midnight , \u043F\u043E\u043B\u043D. \u043A-\u0442, 29-07-2023 - 375$ \n  7 45 Starlight, \u043F\u043E\u043B\u043D. \u043A-\u0442 10-12-2023 -  400$ \n   \n  7 41 Green, \u043F\u043E\u043B\u043D. \u043A-\u0442.  09-05-2023 - 340$ \n  7 41 Midnight MKMX3, \u043F\u043E\u043B\u043D. \u043A-\u0442.  07-06-2023  330$  \n  \n  M A C /  i P A D\n  -----------------------\n  iPad 7 32gb Wifi Gray \u0433\u0430\u0440\u0430\u043D\u0442\u0438\u044F 06.04.2024 - 270$\n  \n  iPad Pro 12.9 M1 512 Wi-Fi+Cellular Space Gray MHR83, \u043A-\u0442.    1255$\n  iPad Pro 12.9 2020 1TB Wi-Fi Space Gray MXAX2, \u043A-\u0442.    880$\n  \n  MacBook Pro 16 (M1 Pro/10C/16C/16/512) Space Gray MK183, \u043F\u043E\u043B\u043D. \u043A-\u0442.  25-11-2023 - 1990$ \n  MacBook Pro 14 (M1 Pro/8C/14C/32/512) Silver Z15J00029, \u043F\u043E\u043B\u043D. \u043A-\u0442.    2130$\n  \n  \u270D\uFE0F Pencil 2 - 120$ \n  \u270D\uFE0F Pencil 1 - 115$  \n  \uD83D\uDC2D\uD83C\uDDEA\uD83C\uDDFA Magic Mouse 2 Space Gray MRME2 - 105$ \n  \uD83D\uDC2D\uD83C\uDDEA\uD83C\uDDFA Magic Mouse 3 Silver MK2E3 - 100$\n  \n  \uD83C\uDFA7 Beats Solo3 Wireless Black, \u043F\u043E\u043B\u043D. \u043A-\u0442.  210$\n  \uD83C\uDFA7 AirPods Pro with MagSafe MLWK3 195$\n  \uD83C\uDFA7 AirPods 3 with Magsafe MME73 190$\n  \uD83C\uDFA7 AirPods 2 MV7N2 135$\n  \uD83C\uDFA7 AirPods 2 with Wireless Case A1938 MRXJ2 145$");
+bot.action("exchange", (ctx) => {
+    ctx.reply(`☘️ ОБМЕНКИ 11.07.2023
+
+  Новая, оригинальная, не восстановленная техника, которая была заменена в рамках мировой гарантии Apple. 
+  - Поставляются без комплекта и коробки, в заводской оригинальной пленке, не активированы ✌🏻
+  
+  i P h o n e 
+  ------------------
+  
+  13 Pro Max 128 Green 03-08-2023  - 1000$🔥
+  13 Pro 256 Gold, полн к-т, 11-11-2023 - 1075$
+  
+  12 mini 128gb 🔵 - 555$
+  12 128 Red - 620$
+  
+  11 128 Black актив  23-01-2024  530$ 
+  11 128 White актив  23-01-2024  530$
+  11 128 Purple актив  21-03-2024  530$
+  
+  ⌚️A p p l e  W a t c h
+  -----------------------
+  
+  7 45 Blue, полн. к-т  10-07-2023 - 375$  
+  7 45 Midnight , полн. к-т, 29-07-2023 - 375$ 
+  7 45 Starlight, полн. к-т 10-12-2023 -  400$ 
+   
+  7 41 Green, полн. к-т.  09-05-2023 - 340$ 
+  7 41 Midnight MKMX3, полн. к-т.  07-06-2023  330$  
+  
+  M A C /  i P A D
+  -----------------------
+  iPad 7 32gb Wifi Gray гарантия 06.04.2024 - 270$
+  
+  iPad Pro 12.9 M1 512 Wi-Fi+Cellular Space Gray MHR83, к-т.    1255$
+  iPad Pro 12.9 2020 1TB Wi-Fi Space Gray MXAX2, к-т.    880$
+  
+  MacBook Pro 16 (M1 Pro/10C/16C/16/512) Space Gray MK183, полн. к-т.  25-11-2023 - 1990$ 
+  MacBook Pro 14 (M1 Pro/8C/14C/32/512) Silver Z15J00029, полн. к-т.    2130$
+  
+  ✍️ Pencil 2 - 120$ 
+  ✍️ Pencil 1 - 115$  
+  🐭🇪🇺 Magic Mouse 2 Space Gray MRME2 - 105$ 
+  🐭🇪🇺 Magic Mouse 3 Silver MK2E3 - 100$
+  
+  🎧 Beats Solo3 Wireless Black, полн. к-т.  210$
+  🎧 AirPods Pro with MagSafe MLWK3 195$
+  🎧 AirPods 3 with Magsafe MME73 190$
+  🎧 AirPods 2 MV7N2 135$
+  🎧 AirPods 2 with Wireless Case A1938 MRXJ2 145$`);
     ctx.answerCbQuery();
 });
-bot.action("about", function (ctx) {
+bot.action("about", (ctx) => {
     ctx.reply("Информация о нас в целом)))", backButton);
     ctx.answerCbQuery();
 });
-bot.action("used", function (ctx) {
-    ctx.reply("\u267B\uFE0F \u0411/\u0423 \u0422\u0415\u0425\u041D\u0418\u041A\u0410 \u043D\u0430 11.07.2023\n\n  \uD83D\uDCC4 \u041E\u0440\u0438\u0433\u0438\u043D\u0430\u043B, \u0431\u0435\u0437 \u0432\u0441\u043A\u0440\u044B\u0442\u0438\u0439 \u0438 \u0440\u0435\u043C\u043E\u043D\u0442\u043E\u0432. \u041D\u0430 \u0432\u0441\u0435 \u0431/\u0443 \u0434\u0435\u0432\u0430\u0439\u0441\u044B \u0434\u0430\u0435\u043C \u0433\u0430\u0440\u0430\u043D\u0442\u0438\u044E 3\u043C\u0435\u0441 \u0438 \u0431\u0435\u0441\u0441\u0440\u043E\u0447\u043D\u0443\u044E \u0441\u043A\u0438\u0434\u043A\u0443 \u043D\u0430 \u043E\u0431\u0441\u043B\u0443\u0436\u0438\u0432\u0430\u043D\u0438\u0435: \n  \n  \n  14 Pro Max 128 Space Black 9/10, \u0430\u043A\u0431 94%, \u043F\u043E\u043B\u043D. \u043A-\u0442 - 1090$\n  \n  13 Pro Max 1Tb Graphite 9/10, \u0430\u043A\u0431 94%, \u043F\u043E\u043B\u043D. \u043A-\u0442. - 1150$\n  13 Pro Max 512 Sierra Blue 9/10, \u0430\u043A\u0431 95% - 1090$\n  13 Pro Max 128 Gold 8.5/10, \u0430\u043A\u0431 97%  - 900$\n  13 Pro Max 128 Gold 8/10, \u0430\u043A\u0431 97% 14-07-2023 - 900$\n  13 Pro Max 128 Graphite 8.5/10, \u0430\u043A\u0431 87% - 900$ \n  13 Pro Max 128 Silver 8.5/10, \u0430\u043A\u0431 94% - 930$\n  13 Pro 512 Graphite 9/10, \u0430\u043A\u0431 98% - 1050$\n  13 Pro 256 Gold 8.5/10, \u0430\u043A\u0431 98%, \u043F\u043E\u043B\u043D. \u043A-\u0442. 10-07-2023- 920$\n  13 Pro 256 Sierra Blue 8/10, \u0430\u043A\u0431 95% - 870$\n  13 Pro 128 Gold 8/10, \u0430\u043A\u0431 99% - 870$\n  \n  13 128 Pink 8/10, \u0430\u043A\u0431 99%  28-10-2023- 650$ \n  \n  13 mini 128 Pink 10/10 1\u0446\u0438\u043A\u043B 100% - 650$ \uD83D\uDD25\n  13 mini 128 Pink 8/10, \u0430\u043A\u0431 95% - 585$\n  \n  12 64 Green 8.5/10 \u0430\u043A\u0431 100% \u0433\u0430\u0440\u0430\u043D\u0442\u0438\u044F 31.08.2023 - 545$\n  \n  12 mini 128 Black 7.5/10 \u0430\u043A\u0431 84% - 435$ \n  \n  11 Pro Max 512 Graphite 9/10, \u0430\u043A\u0431 93% - 595$\n  \n  Apple Watch 2 38mm  Gold (\u043D\u043E\u0432\u044B\u0439 \u0430\u043A\u0431) 8/10 - 90$\n  \n  Mac Mini M1/8/256 10/10 \u043A\u0430\u043A \u043D\u043E\u0432\u044B\u0439 - 540$ \n  \n  iMac 21.5\u201D 2013late 2.7ghz/i5/8/1tb 9.5/10 + \u2328\uFE0F - 310$ \n  \n  \u2757\uFE0F iMac 21.5 2019 4k i5/3ghz/32Gb ddr4/512 + \uD83D\uDDB1\uFE0F+ \u2328\uFE0F - 860$ \n  \n  iPad mini 6 64 Wi-Fi Purple MK7R3 10/10, 1 \u0446\u0438\u043A\u043B, \u043A-\u0442 - 490$\uD83D\uDD25\n  \n  Valve Steam Deck 256, \u043F\u043E\u043B\u043D. \u043A-\u0442.    640$\n  \n  Pixel 7 Pro 5G 12/256 Snow 9/10 - 715$\n  \n  Homepod white - 200$ \uD83D\uDD25\n  \n  Sony PlayStation 4 Pro 9/10 (\u043F\u043E\u0441\u043B\u0435\u0434\u043D\u044F\u044F \u0440\u0435\u0432\u0438\u0437\u0438\u044F) + 2 \u0433\u0435\u0439\u043C\u043F\u0430\u0434\u0430 - 290$ \n  \n   \n  \u041E\u043F\u043B\u0430\u0442\u0430 \u0437\u0430 \u0442\u0435\u0445\u043D\u0438\u043A\u0443 \u043E\u0441\u0443\u0449\u0435\u0441\u0442\u0432\u043B\u044F\u0435\u0442\u0441\u044F \u043D\u0430\u043B\u0438\u0447\u043D\u044B\u043C\u0438 \u043F\u0440\u0438 \u043F\u043E\u043B\u0443\u0447\u0435\u043D\u0438\u0438.\n  \u0414\u043E\u0441\u0442\u0443\u043F\u043D\u0430\u044F \u043E\u043F\u043B\u0430\u0442\u0430 \u0432 \u043A\u0440\u0438\u043F\u0442\u043E\u0432\u0430\u043B\u044E\u0442\u0435. \n  \n  \u041D\u0435 \u043D\u0430\u0448\u043B\u0438 \u043D\u0443\u0436\u043D\u0443\u044E \u043C\u043E\u0434\u0435\u043B\u044C? \n  \u041F\u0438\u0448\u0438\u0442\u0435 \u0432 \u0434\u0438\u0440\u0435\u043A\u0442 - \u043F\u043E\u0434\u0431\u0435\u0440\u0435\u043C \u043F\u043E\u0434 \u0437\u0430\u043A\u0430\u0437) \n  \n  \uD83D\uDC47\uD83C\uDFFB\uD83D\uDC47\uD83C\uDFFB\uD83D\uDC47\uD83C\uDFFB\uD83D\uDC47\uD83C\uDFFB\uD83D\uDC47\uD83C\uDFFB\n  @Roman_zvlv\n  +375(33)605-63-57", backButton);
+bot.action("used", (ctx) => {
+    ctx.reply(`♻️ Б/У ТЕХНИКА на 11.07.2023
+
+  📄 Оригинал, без вскрытий и ремонтов. На все б/у девайсы даем гарантию 3мес и бессрочную скидку на обслуживание: 
+  
+  
+  14 Pro Max 128 Space Black 9/10, акб 94%, полн. к-т - 1090$
+  
+  13 Pro Max 1Tb Graphite 9/10, акб 94%, полн. к-т. - 1150$
+  13 Pro Max 512 Sierra Blue 9/10, акб 95% - 1090$
+  13 Pro Max 128 Gold 8.5/10, акб 97%  - 900$
+  13 Pro Max 128 Gold 8/10, акб 97% 14-07-2023 - 900$
+  13 Pro Max 128 Graphite 8.5/10, акб 87% - 900$ 
+  13 Pro Max 128 Silver 8.5/10, акб 94% - 930$
+  13 Pro 512 Graphite 9/10, акб 98% - 1050$
+  13 Pro 256 Gold 8.5/10, акб 98%, полн. к-т. 10-07-2023- 920$
+  13 Pro 256 Sierra Blue 8/10, акб 95% - 870$
+  13 Pro 128 Gold 8/10, акб 99% - 870$
+  
+  13 128 Pink 8/10, акб 99%  28-10-2023- 650$ 
+  
+  13 mini 128 Pink 10/10 1цикл 100% - 650$ 🔥
+  13 mini 128 Pink 8/10, акб 95% - 585$
+  
+  12 64 Green 8.5/10 акб 100% гарантия 31.08.2023 - 545$
+  
+  12 mini 128 Black 7.5/10 акб 84% - 435$ 
+  
+  11 Pro Max 512 Graphite 9/10, акб 93% - 595$
+  
+  Apple Watch 2 38mm  Gold (новый акб) 8/10 - 90$
+  
+  Mac Mini M1/8/256 10/10 как новый - 540$ 
+  
+  iMac 21.5” 2013late 2.7ghz/i5/8/1tb 9.5/10 + ⌨️ - 310$ 
+  
+  ❗️ iMac 21.5 2019 4k i5/3ghz/32Gb ddr4/512 + 🖱️+ ⌨️ - 860$ 
+  
+  iPad mini 6 64 Wi-Fi Purple MK7R3 10/10, 1 цикл, к-т - 490$🔥
+  
+  Valve Steam Deck 256, полн. к-т.    640$
+  
+  Pixel 7 Pro 5G 12/256 Snow 9/10 - 715$
+  
+  Homepod white - 200$ 🔥
+  
+  Sony PlayStation 4 Pro 9/10 (последняя ревизия) + 2 геймпада - 290$ 
+  
+   
+  Оплата за технику осуществляется наличными при получении.
+  Доступная оплата в криптовалюте. 
+  
+  Не нашли нужную модель? 
+  Пишите в директ - подберем под заказ) 
+  
+  👇🏻👇🏻👇🏻👇🏻👇🏻
+  @Roman_zvlv
+  +375(33)605-63-57`, backButton);
     ctx.answerCbQuery();
 });
-bot.action("back", function (ctx) {
+bot.action("back", (ctx) => {
     var _a;
-    var name = (_a = ctx.from) === null || _a === void 0 ? void 0 : _a.first_name;
-    ctx.reply("\u0417\u0434\u0440\u0430\u0432\u0441\u0442\u0432\u0443\u0439\u0442\u0435, ".concat(name, ". \u0414\u043E\u0431\u0440\u043E \u043F\u043E\u0436\u0430\u043B\u043E\u0432\u0430\u0442\u044C \u0432 Apple Park!"), menuButtons);
+    const name = (_a = ctx.from) === null || _a === void 0 ? void 0 : _a.first_name;
+    ctx.reply(`Здравствуйте, ${name}. Добро пожаловать в Apple Park!`, menuButtons);
     ctx.answerCbQuery();
 });
 bot.launch();
